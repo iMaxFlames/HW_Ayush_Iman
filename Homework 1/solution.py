@@ -75,7 +75,6 @@ def fast_approx_ln(x, n):
         matrix.append(row)
     return (x - 1)/matrix[-1][-1]
 
-print(fast_approx_ln(9, 10))
 
 #%% Task 5
 
