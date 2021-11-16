@@ -26,7 +26,7 @@ def approx_ln(x, n):
         g = np.sqrt(a*pre_g)
     return (x-1)/a
 
-print(approx_ln(9, 100))
+print(approx_ln(9, 2))
 
 #%% Task 2
 
@@ -74,6 +74,8 @@ def fast_approx_ln(x, n):
         row = [a(x, i) for i in range(minimum, n+1)]
         matrix.append(row)
     return (x - 1)/matrix[-1][-1]
+
+print(fast_approx_ln(9, 2))
 
 #%% Task 5
 
