@@ -26,7 +26,7 @@ def approx_ln(x, n):
         g = np.sqrt(a*pre_g)
     return (x-1)/a
 
-print(approx_ln(9, 2))
+print(approx_ln(1.41, 5))
 
 #%% Task 2
 
@@ -54,28 +54,20 @@ plt.plot(n_val, diff)
 
 #%% Task 4
 
-def a(x, i): #This return a_i
-    a = (1 + x)/2
-    g = np.sqrt(x)
-    for count in range(i):
-        pre_a = a
-        pre_g = g
-        a = (pre_a + pre_g)/2
-        g = np.sqrt(a*pre_g)
-    return a
-
 def fast_approx_ln(x, n):
-    matrix = []
-    minimum = 0
+    def d(k, i):
+        if k == 0:
+            a = (1 + x)/2
+            g = np.sqrt(x)
+            for n in range(i+1):
+                pre_a = a
+                pre_g = g
+                a = (pre_a + pre_g)/2
+                g = np.sqrt(a*pre_g)
+            return a
+        else:
+            return (d(k-1, i) - 4**(-k) * d(k-1, i-1))/(1 - 4**(-k))
+    return (x - 1)/d(n, n)
 
-    #Generates the top right corner and main diagonal of matrix
-    
-    for minimum in range(0, n+1):
-        row = [a(x, i) for i in range(minimum, n+1)]
-        matrix.append(row)
-    return (x - 1)/matrix[-1][-1]
-
-print(fast_approx_ln(9, 2))
-
-#%% Task 5
+print(fast_approx_ln(1.41, 5))
 
